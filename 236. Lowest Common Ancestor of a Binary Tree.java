@@ -39,6 +39,20 @@ p and q will exist in the tree.
  *     TreeNode right;
  *     TreeNode(int x) { val = x; }
  * }
+ 
+ python3:
+ 
+ class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root is None or root.val==p.val or root.val==q.val: return root
+        left= self.lowestCommonAncestor(root.left,p,q)
+        right= self.lowestCommonAncestor(root.right,p,q)
+        if left is None: return right
+        elif right is None: return left
+        else: return root
+        
+ 
+ 
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
