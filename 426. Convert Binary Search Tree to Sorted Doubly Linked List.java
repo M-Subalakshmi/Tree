@@ -24,37 +24,28 @@ The number of nodes in the tree is in the range [0, 2000].
 All the values of the tree are unique.
 
 class Solution {
-    private Node first;
-    private Node last;
-
+    private Node head;
+    private Node node;
     public Node treeToDoublyList(Node root) {
-        if (root == null) {
-            return null;
-        }
-        
-        treeToDoublyListUtil(root);
-        first.right = last;
-        last.left = first;
-        return last;
+        if(root==null) return null;
+        tree(root);
+        node.right=head;
+        head.left=node;
+        return head;
     }
-
-    public void treeToDoublyListUtil(Node root) {
-        if (root == null) {
-            return;
+    private void tree(Node root){
+        if(root==null) return;
+        
+        tree(root.left);
+        if(head==null){
+            head=root;
         }
-
-        treeToDoublyListUtil(root.left);
-        if (last == null) {
-            last = root;
+        if(node!=null){
+            node.right=root;
         }
-
-        if (first != null) {
-            first.right = root;
-        }
-        root.left = first;
-        first = root;
-
-        treeToDoublyListUtil(root.right);
+        root.left=node;
+        node=root;
+        tree(root.right);
     }
 }
 
